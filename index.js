@@ -6,7 +6,7 @@ d3.select("div")
   .append("h2")
   .attr("id", "description")
   .text("1753 - 2015: base temperature 8.66℃");
-const w = 900;
+const w = 1500;
 const h = 500;
 const padding = 70;
 const months = [
@@ -147,7 +147,7 @@ async function proceede() {
       return month[i];
     })
     .attr("data-year", (d) => d.year)
-    .attr("data-temp", (d) => baseTemp - d.variance)
+    .attr("data-temp", (d) => baseTemp + d.variance)
     .on("mouseover", (evt, d) => {
       div
         .style("opacity", 0.9)
@@ -157,7 +157,7 @@ async function proceede() {
             " " +
             d.year +
             "<br/>" +
-            Math.round((baseTemp - d.variance) * 10) / 10 +
+            Math.round((baseTemp + d.variance) * 10) / 10 +
             "°C" +
             "<br/>" +
             Math.round(d.variance * 10) / 10 +
@@ -170,5 +170,112 @@ async function proceede() {
       div.style("opacity", 0);
     });
 
-  console.log(fullData);
+  const legend = svg.append("g").attr("id", "legend");
+  const colScale = d3.scaleLinear().domain([4, 13]).range([padding, 300]);
+  const colAxis = d3
+    .axisBottom(colScale)
+    .ticks(9)
+    .tickFormat((d) => {
+      return d == 4 ? ">4" : d == 13 ? "12<" : d;
+    });
+
+  legend
+    .append("g")
+    .attr("transform", "translate(0," + (h - 17) + " )")
+    .call(colAxis);
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 3))
+    .attr("y", h - 37)
+    .attr("width", 35)
+    .attr("height", 20)
+    .attr("fill", "red");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 2.5))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", " rgb(194, 80, 4)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 2))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(255, 102, 0)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 1.5))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(194, 81, 6)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 1))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(255, 136, 0)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp + 0.3))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(255, 230, 0)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 0.8))
+    .attr("y", h - 37)
+    .attr("width", 28)
+    .attr("height", 20)
+    .attr("fill", "yellow");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 1.5))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(227, 253, 179)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 2))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(197, 243, 255)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 3))
+    .attr("y", h - 37)
+    .attr("width", 25)
+    .attr("height", 20)
+    .attr("fill", "rgb(78, 149, 255)");
+
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 3.5))
+    .attr("y", h - 37)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", "rgb(93, 131, 255)");
+  legend
+    .append("rect")
+    .attr("x", colScale(baseTemp - 4.5))
+    .attr("y", h - 37)
+    .attr("width", 26)
+    .attr("height", 20)
+    .attr("fill", "rgb(84, 84, 255)");
 }
