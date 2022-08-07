@@ -1,3 +1,45 @@
 .container {
   text-align: center;
 }
+.ultra-mega-hot {
+  fill: red;
+}
+.ultra-hot {
+  fill: rgb(194, 80, 4);
+}
+.super-hot {
+  fill: rgb(255, 102, 0);
+}
+.real-hot {
+  fill: rgb(194, 81, 6);
+}
+.hot {
+  fill: rgb(255, 136, 0);
+}
+.warm {
+  fill: rgb(255, 230, 0);
+}
+.normal {
+  fill: yellow;
+}
+.chill {
+  fill: rgb(227, 253, 179);
+}
+.cold {
+  fill: rgb(197, 243, 255);
+}
+.real-cold {
+  fill: rgb(78, 149, 255);
+}
+.super-cold {
+  fill: rgb(100, 136, 255);
+}
+.ultra-cold {
+  fill: rgb(93, 131, 255);
+}
+.ultra-mega-cold {
+  fill: rgb(84, 84, 255);
+}
+#tooltip {
+  position: absolute;
+}
